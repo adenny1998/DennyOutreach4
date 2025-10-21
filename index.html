@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Outreach Tracker</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    :root { --bg:#fafafa; --card:#fff; --muted:#6b7280; --border:#e5e7eb; --ink:#111827; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background:var(--bg); color:var(--ink); }
+    header { position: sticky; top:0; z-index:10; background:rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); }
+    header .wrap { max-width:72rem; margin:0 auto; padding:1rem; display:flex; align-items:center; justify-content:space-between; }
+    main { max-width:72rem; margin:0 auto; padding:1rem; }
+    footer { color:var(--muted); text-align:center; padding:2rem 1rem; border-top:1px solid var(--border); }
+
+    .tabs { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .tabs button { padding:.5rem .75rem; border-radius:12px; border:1px solid var(--border); background:#fff; color:var(--ink); font-weight:600; cursor:pointer; }
+    .tabs button.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+
+    .card { background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+    .card .hd { padding:1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .card .bd { padding:1rem; }
+
+    .sheet { width:100%; border-collapse:collapse; }
+    .sheet th, .sheet td { padding:10px 12px; border-bottom:1px solid #f1f5f9; text-align:left; vertical-align:top; }
+    .sheet thead th { background:#f8fafc; font-weight:600; font-size:12px; color:#64748b; text-transform:uppercase; letter-spacing:.04em; }
+
+    .input, select { padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:#fff; width:100%; }
+    .input:focus, select:focus, textarea:focus { outline:2px solid var(--ink); outline-offset:0; }
+    .ta { padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:#fff; width:100%; resize:none; line-height:1.4; }
+
+    .btn { padding:8px 12px; border-radius:10px; border:1px solid var(--ink); background:var(--ink); color:#fff; font-weight:600; cursor:pointer; }
+    .btn.subtle { background:#fff; color:var(--ink); border-color:var(--border); }
+    .btn.success { background:#065f46; border-color:#065f46; }
+    .btn.danger { background:#b91c1c; border-color:#b91c1c; }
+
+    .stack { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .two { display:grid; grid-template-columns: 1fr 1.2fr; gap:1rem; }
+    @media (max-width:900px){ .two { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1 style="font-size:1.35rem; font-weight:700">Outreach Tracker</h1>
+      <div style="color:#6b7280; font-size:.9rem">Local only • no external services</div>
+    </div>
+  </header>
+
+  <main>
+    <div id="root">Loading…</div>
+  </main>
+
+  <footer>© <span id="year"></span> Outreach Lite • Data saved in your browser</footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <!-- Load app code through Babel -->
+  <script type="text/babel" data-presets="react" src="app.js?v=2"></script>
+
+  <!-- Fallback helper -->
+  <script>
+    window.addEventListener("error", () => {
+      const el = document.getElementById("root");
+      if (el && el.textContent.includes("Loading…")) {
+        el.innerHTML = "<div style='padding:16px;font:14px system-ui'>Script error. Confirm that <b>app.js</b> sits next to <b>index.html</b> and the tag uses <b>type=\"text/babel\"</b> with <b>data-presets=\"react\"</b>.</div>";
+      }
+    });
+  </script>
+</body>
+</html>
